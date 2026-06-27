@@ -14,7 +14,7 @@ BAUD ?= 115200
 CPU_HZ ?= 16000000
 LINKER_SCRIPT ?= linker/fe310_flash.ld
 
-ARCH_FLAGS ?= -march=rv32imac -mabi=ilp32 -mcmodel=medany
+ARCH_FLAGS ?= -march=rv32imac_zicsr -mabi=ilp32 -mcmodel=medany
 COMMON_FLAGS := $(ARCH_FLAGS) -Os -g3 -ffunction-sections -fdata-sections \
 	-fno-common -Wall -Wextra -Wshadow -Wconversion \
 	-DBOARD_$(shell echo $(BOARD) | tr a-z A-Z)=1 \

@@ -3,6 +3,10 @@
 The default target is `redv_redboard`, using the FE310-G002 memory map and
 UART0 as the CLI console.
 
+The default ISA flag is `rv32imac_zicsr`.  Newer GNU RISC-V toolchains require
+the explicit `zicsr` extension for instructions such as `csrw`, `csrsi`, and
+`csrci`.
+
 ## Clocks
 
 `BOARD_CPU_HZ` defaults to `16000000`.  It is used for UART, SPI, and I2C

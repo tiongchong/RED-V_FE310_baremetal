@@ -19,6 +19,8 @@ The CLI is provided by `funbiscuit/embedded-cli` under
 
 Install a RISC-V bare-metal toolchain that provides either
 `riscv64-unknown-elf-gcc` or `riscv32-unknown-elf-gcc`.
+The default ISA flag is `-march=rv32imac_zicsr`, which is required by newer
+RISC-V toolchains for CSR instructions used during trap and interrupt setup.
 
 ```sh
 make

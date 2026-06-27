@@ -31,7 +31,7 @@ target_compile_definitions(fe310_cli PRIVATE
 )
 
 target_compile_options(fe310_cli PRIVATE
-    -march=rv32imac
+    -march=rv32imac_zicsr
     -mabi=ilp32
     -mcmodel=medany
     -Os
@@ -46,7 +46,7 @@ target_compile_options(fe310_cli PRIVATE
 )
 
 target_link_options(fe310_cli PRIVATE
-    -march=rv32imac
+    -march=rv32imac_zicsr
     -mabi=ilp32
     -mcmodel=medany
     -nostartfiles
