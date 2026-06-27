@@ -58,6 +58,7 @@ SECTIONS
     {
         . = ALIGN(4);
         _sdata = .;
+        PROVIDE(__global_pointer$ = . + 0x800);
         *(.data .data.*)
         *(.sdata .sdata.*)
         *(.gnu.linkonce.d.*)
@@ -71,6 +72,7 @@ SECTIONS
     {
         . = ALIGN(4);
         _sbss = .;
+        *(.scommon)
         *(.bss .bss.*)
         *(.sbss .sbss.*)
         *(COMMON)

@@ -12,6 +12,7 @@ add_executable(fe310_cli
 )
 
 file(GLOB_RECURSE APP_SOURCES CONFIGURE_DEPENDS
+    startup/*.c
     src/*.c
     tests/*.c
     third_party/embedded-cli/lib/src/*.c

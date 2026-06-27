@@ -24,6 +24,7 @@ SECTIONS
         . = ALIGN(4);
         _sidata = .;
         _sdata = .;
+        PROVIDE(__global_pointer$ = . + 0x800);
         *(.data .data.*)
         *(.sdata .sdata.*)
         . = ALIGN(4);
@@ -34,6 +35,7 @@ SECTIONS
     {
         . = ALIGN(4);
         _sbss = .;
+        *(.scommon)
         *(.bss .bss.*)
         *(.sbss .sbss.*)
         *(COMMON)

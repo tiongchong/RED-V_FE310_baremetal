@@ -28,7 +28,7 @@ LDFLAGS := $(ARCH_FLAGS) -nostartfiles -Wl,--gc-sections \
 	-T$(LINKER_SCRIPT) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map
 LDLIBS := -lc -lgcc -lnosys
 
-SRC_C := $(shell find src tests third_party/embedded-cli/lib/src -name '*.c' | sort)
+SRC_C := $(shell find src tests startup third_party/embedded-cli/lib/src -name '*.c' | sort)
 SRC_S := $(shell find startup -name '*.S' | sort)
 OBJ_C := $(patsubst %.c,$(BUILD_DIR)/%.o,$(SRC_C))
 OBJ_S := $(patsubst %.S,$(BUILD_DIR)/%.o,$(SRC_S))
