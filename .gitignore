@@ -1,0 +1,9 @@
+build/
+*.elf
+*.bin
+*.map
+*.lst
+*.o
+*.d
+__pycache__/
+.DS_Store
