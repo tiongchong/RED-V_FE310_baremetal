@@ -59,32 +59,38 @@ static inline void fe310_wait_for_interrupt(void)
 
 static inline void fe310_enable_global_interrupts(void)
 {
-    __asm__ volatile("csrsi mstatus, 0x8" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x8u;
+    __asm__ volatile("csrs mstatus, %0" :: "r"(mask) : "memory");
 }
 
 static inline void fe310_disable_global_interrupts(void)
 {
-    __asm__ volatile("csrci mstatus, 0x8" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x8u;
+    __asm__ volatile("csrc mstatus, %0" :: "r"(mask) : "memory");
 }
 
 static inline void fe310_enable_machine_timer_interrupt(void)
 {
-    __asm__ volatile("csrsi mie, 0x80" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x80u;
+    __asm__ volatile("csrs mie, %0" :: "r"(mask) : "memory");
 }
 
 static inline void fe310_disable_machine_timer_interrupt(void)
 {
-    __asm__ volatile("csrci mie, 0x80" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x80u;
+    __asm__ volatile("csrc mie, %0" :: "r"(mask) : "memory");
 }
 
 static inline void fe310_enable_machine_external_interrupt(void)
 {
-    __asm__ volatile("csrsi mie, 0x800" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x800u;
+    __asm__ volatile("csrs mie, %0" :: "r"(mask) : "memory");
 }
 
 static inline void fe310_disable_machine_external_interrupt(void)
 {
-    __asm__ volatile("csrci mie, 0x800" ::: "memory");
+    const uintptr_t mask = (uintptr_t)0x800u;
+    __asm__ volatile("csrc mie, %0" :: "r"(mask) : "memory");
 }
 
 #endif
