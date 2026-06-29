@@ -12,6 +12,13 @@
    make flash
    ```
 
+   This uses `openocd/redv_redboard.cfg`.  To use a different OpenOCD binary
+   or config:
+
+   ```sh
+   make flash OPENOCD=/path/to/openocd OPENOCD_CFG=/path/to/board.cfg
+   ```
+
 3. Find the serial port:
 
    ```sh

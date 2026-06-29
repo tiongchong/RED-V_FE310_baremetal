@@ -13,6 +13,8 @@ PORT ?= /dev/ttyACM0
 BAUD ?= 115200
 CPU_HZ ?= 16000000
 LINKER_SCRIPT ?= linker/fe310_flash.ld
+OPENOCD ?= openocd
+OPENOCD_CFG ?= openocd/redv_redboard.cfg
 
 ARCH_FLAGS ?= -march=rv32imac_zicsr -mabi=ilp32 -mcmodel=medany
 COMMON_FLAGS := $(ARCH_FLAGS) -Os -g3 -ffunction-sections -fdata-sections \
@@ -58,10 +60,10 @@ $(BUILD_DIR)/%.o: %.S
 	$(CC) $(ASFLAGS) -MMD -MP -c $< -o $@
 
 flash: $(BUILD_DIR)/$(TARGET).elf
-	scripts/flash_openocd.sh $(BUILD_DIR)/$(TARGET).elf
+	OPENOCD="$(OPENOCD)" OPENOCD_CFG="$(OPENOCD_CFG)" scripts/flash_openocd.sh $(BUILD_DIR)/$(TARGET).elf
 
 debug: $(BUILD_DIR)/$(TARGET).elf
-	scripts/gdb_openocd.sh $(BUILD_DIR)/$(TARGET).elf
+	OPENOCD="$(OPENOCD)" OPENOCD_CFG="$(OPENOCD_CFG)" scripts/gdb_openocd.sh $(BUILD_DIR)/$(TARGET).elf
 
 cli:
 	python3 scripts/serial_cli.py --port $(PORT) --baud $(BAUD)
@@ -85,5 +87,7 @@ help:
 	@echo "  BOARD=redv_redboard"
 	@echo "  CPU_HZ=16000000"
 	@echo "  BAUD=115200"
+	@echo "  OPENOCD=openocd"
+	@echo "  OPENOCD_CFG=openocd/redv_redboard.cfg"
 
 -include $(OBJS:.o=.d)

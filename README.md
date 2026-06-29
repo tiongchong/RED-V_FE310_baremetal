@@ -28,6 +28,10 @@ make flash
 make cli PORT=/dev/ttyACM0
 ```
 
+`make flash` uses the repo-local OpenOCD config
+`openocd/redv_redboard.cfg`, so it does not depend on your OpenOCD install
+having `board/sifive-hifive1-revb.cfg`.
+
 Windows example:
 
 ```powershell
