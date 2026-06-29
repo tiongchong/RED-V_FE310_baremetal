@@ -15,6 +15,9 @@ CPU_HZ ?= 16000000
 LINKER_SCRIPT ?= linker/fe310_flash.ld
 OPENOCD ?= openocd
 OPENOCD_CFG ?= openocd/redv_redboard.cfg
+JLINK ?= JLinkExe
+JLINK_DEVICE ?= FE310
+JLINK_SPEED ?= 4000
 
 ARCH_FLAGS ?= -march=rv32imac_zicsr -mabi=ilp32 -mcmodel=medany
 COMMON_FLAGS := $(ARCH_FLAGS) -Os -g3 -ffunction-sections -fdata-sections \
@@ -62,6 +65,9 @@ $(BUILD_DIR)/%.o: %.S
 flash: $(BUILD_DIR)/$(TARGET).elf
 	OPENOCD="$(OPENOCD)" OPENOCD_CFG="$(OPENOCD_CFG)" scripts/flash_openocd.sh $(BUILD_DIR)/$(TARGET).elf
 
+flash-jlink: $(BUILD_DIR)/$(TARGET).elf
+	JLINK="$(JLINK)" JLINK_DEVICE="$(JLINK_DEVICE)" JLINK_SPEED="$(JLINK_SPEED)" scripts/flash_jlink.sh $(BUILD_DIR)/$(TARGET).elf
+
 debug: $(BUILD_DIR)/$(TARGET).elf
 	OPENOCD="$(OPENOCD)" OPENOCD_CFG="$(OPENOCD_CFG)" scripts/gdb_openocd.sh $(BUILD_DIR)/$(TARGET).elf
 
@@ -78,6 +84,7 @@ help:
 	@echo "Targets:"
 	@echo "  make                         Build $(TARGET) for $(BOARD)"
 	@echo "  make flash                   Flash with OpenOCD"
+	@echo "  make flash-jlink             Flash with SEGGER J-Link Commander"
 	@echo "  make debug                   Start GDB against OpenOCD"
 	@echo "  make cli PORT=<port>         Open UART CLI"
 	@echo "  make clean                   Remove build outputs"
@@ -89,5 +96,8 @@ help:
 	@echo "  BAUD=115200"
 	@echo "  OPENOCD=openocd"
 	@echo "  OPENOCD_CFG=openocd/redv_redboard.cfg"
+	@echo "  JLINK=JLinkExe"
+	@echo "  JLINK_DEVICE=FE310"
+	@echo "  JLINK_SPEED=4000"
 
 -include $(OBJS:.o=.d)

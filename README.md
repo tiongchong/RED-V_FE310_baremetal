@@ -32,6 +32,19 @@ make cli PORT=/dev/ttyACM0
 `openocd/redv_redboard.cfg`, so it does not depend on your OpenOCD install
 having `board/sifive-hifive1-revb.cfg`.
 
+If your board works in FreedomStudio/J-Link GDB Server but OpenOCD cannot find
+the probe, use SEGGER's J-Link Commander path instead:
+
+```sh
+make flash-jlink
+```
+
+For raw binaries, the script writes to the FE310 flash application address:
+
+```sh
+scripts/flash_jlink.sh build/redv_redboard/fe310_cli.bin
+```
+
 Windows example:
 
 ```powershell

@@ -19,6 +19,19 @@
    make flash OPENOCD=/path/to/openocd OPENOCD_CFG=/path/to/board.cfg
    ```
 
+   If OpenOCD cannot enumerate the on-board J-Link but FreedomStudio works,
+   use the SEGGER tool path:
+
+   ```sh
+   make flash-jlink
+   ```
+
+   Override the J-Link Commander executable if it is not in `PATH`:
+
+   ```sh
+   make flash-jlink JLINK=/Applications/SEGGER/JLink/JLinkExe
+   ```
+
 3. Find the serial port:
 
    ```sh
